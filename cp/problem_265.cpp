@@ -198,9 +198,37 @@ int ceil_div(int a,int b){
  
 // ------------------------- SOLVE --------------------------
 void solve() {
-    int n,k,a,b;
-    cin>>n>>k>>a>>b;
-    
+    ll n,k,a,b;
+    cin>>n>>k>>a>>b;  // a for 1 and b for div
+    ll temp=n;
+    ll cost =0;
+    if(k==1){
+        cout<<(n-1)*a<<"\n";
+        return;
+    }
+    while(temp !=1){
+     if(temp % k==0)  {
+       int div = temp / k;
+       if( a*(temp-div) >= b){
+        cost+=b;
+       }
+       else{
+        cost+=a*(temp-div);
+       }
+       temp=div;
+      }
+      else{
+        long long rem = temp % k;
+
+            if(rem==0) rem=1;
+
+            if(temp-rem < 1) rem = temp-1;
+
+            temp -= rem;
+            cost += rem*a;
+      }
+    }
+    cout<<cost<<"\n";
 }
 
 
@@ -210,7 +238,8 @@ int main() {
     cin.tie(NULL);
 
     int t;
-    cin >> t;
+    t=1;
+   // cin >> t;
 
     while (t--) solve();
 
