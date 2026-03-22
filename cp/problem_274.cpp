@@ -197,98 +197,69 @@ int ceil_div(int a,int b){
     return (a + b - 1) / b;
 }
 
-
-// SegmentTree 
-class SGTree {  
-public:
-    vector<int> seg;
-    SGTree(int n) {
-        seg.resize(4 * n + 1);
-    }
-
-    void build(int ind, int low, int high, vector<int>&arr,int orr) {
-        if (low == high) {
-            seg[ind] = arr[low];
-            return;
-        }
-
-        int mid = (low + high) / 2;
-        build(2 * ind + 1, low, mid, arr,!orr);
-        build(2 * ind + 2, mid + 1, high, arr,!orr);
-        if(orr) seg[ind] = seg[2 * ind + 1] | seg[2 * ind + 2];
-        if(!orr) seg[ind] = seg[2 * ind + 1]^ seg[2 * ind + 2];
-    }
-
-    int Query(int ind, int low, int high, int l, int r) {
-        // no overlap
-        if (r < low || high < l) return INT_MAX;
-
-        // complete overlap
-        if (low >= l && high <= r) return seg[ind];
-
-        int mid = (low + high) >> 1;
-        int left = Query(2 * ind + 1, low, mid, l, r);
-        int right = Query(2 * ind + 2, mid + 1, high, l, r);
-        return min(left, right);
-    }
-    void update(int ind, int low, int high, int i, int val, int orr) {
-        if (low == high) {
-            seg[ind] = val;
-            return;
-        }
-
-        int mid = (low + high) >> 1;
-        if (i <= mid) update(2 * ind + 1, low, mid, i, val,!orr);
-        else update(2 * ind + 2, mid + 1, high, i, val, !orr);
-        if(orr) seg[ind] = seg[2 * ind + 1] | seg[2 * ind + 2];
-        if(!orr) seg[ind] = seg[2 * ind + 1]^ seg[2 * ind + 2];
-    }
-};
- 
 // "all my victories belong to god and all my loses are mine alone"
  
  
  
  
 // ------------------------- SOLVE --------------------------
-void solve() {
-    int a, b, c;
-    cin >> a >> b >> c;
 
-    int cnt[3] = {a, b, c};
-    char ch[3] = {'R', 'G', 'B'};
+struct info{
+  int open,close,full;
+  info() { open = close = full = 0; }
+  info(int _open,int _close,int _full){
+    open=_open;
+    close=_close;
+    full=_full;
+  }
+};
 
-    string res;
+info merge(info left,info right){
+    info ans= info(0,0,0);
+    ans.full=left.full + right.full + min(left.open,right.close);
+    ans.open=left.open + right.open - min(left.open,right.close);
+    ans.close=left.close + right.close - min(left.open,right.close);
+    return ans;
+}
 
-    while (true) {
-        int p = -1;
-        int b = -1;
-        int ti = -1;
-
-        for (int i = 0; i < 3; i++) {
-            if (cnt[i] == 0) continue;
-
-            int len = res.size();
-
-            if (len >= 1 && res[len - 1] == ch[i]) continue;
-            if (len >= 3 && res[len - 3] == ch[i]) continue;
-
-            int t = (len >= 2 && res[len - 2] == ch[i]);
-
-            if (cnt[i] > b || (cnt[i] == b && t > ti)) {
-                b = cnt[i];
-                ti = t;
-                p = i;
-            }
+void build(int ind,int low,int high,string &s,vector<info>&seg){
+       if (low == high) {
+            seg[ind].open =s[low]=='(';
+            seg[ind].close=s[low]==')';
+            seg[ind].full=0;
+            return;
         }
 
-        if (p == -1) break;
+         int mid=(low+high)/2;
+         build(2*ind+1, low, mid, s, seg);
+         build(2*ind+2, mid+1, high, s, seg);
+         seg[ind]=merge(seg[2*ind+1],seg[2*ind+2]);
+      
+}
 
-        res += ch[p];
-        cnt[p]--;
-    }
-
-    cout << res << '\n';
+info query(int ind,int low,int high,int l,int r,vector<info>&seg){
+    if(high < l || low>r) return info();
+    if(low >=l && high <=r) return seg[ind];
+    int mid=(low + high) /2;
+    info left=query(2*ind +1,low,mid,l,r,seg);
+    info right=query(2*ind +2,mid+1,high,l,r,seg);
+    return merge(left,right);
+}
+void solve() {
+      string s;
+      cin>>s;
+      int n=s.size();
+      vector<info> seg(4 * n);
+      build(0,0,n-1,s,seg);
+      int q;
+      cin>>q;
+      while(q--){
+        int l,r;
+        cin>>l>>r;
+        l--,r--;
+        info ans=query(0,0,n-1,l,r,seg);
+        cout<<ans.full * 2<<"\n";
+      }
 }
 
 int main() {
@@ -297,10 +268,10 @@ int main() {
     cin.tie(NULL);
     
     int t;
-    if (cin >> t) {
-        while (t--) {
-            solve();
-        }
+    t=1;
+    //cin>>t;
+    while(t--){
+        solve();
     }
     
     return 0;
