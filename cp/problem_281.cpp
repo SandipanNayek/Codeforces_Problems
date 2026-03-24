@@ -1,0 +1,155 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+// --- Type shortcuts ---
+using ll = long long;
+using ull = unsigned long long; 
+using ld = long double;
+using pii = pair<int,int>;
+using pll = pair<ll,ll>;
+ 
+// --- Macros ---
+#define all(x) (x).begin(), (x).end()
+#define pb push_back
+#define ff first
+#define ss second
+#define vi vector<int>
+#define vii vector<ll>
+
+#define fr(i,n) for(int i = 0; i < n; i++)
+#define fr1(i,n) for(int i = 1; i <= n; i++)
+#define rev(i,n) for(int i = n-1; i >= 0; i--)
+
+
+// --- Constants ---
+const int INF = 1e9;
+const ll LINF = 1e18;
+const int MOD =  998244353;
+ 
+// --- Utility functions ---
+ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
+ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
+ 
+ll modpow(ll a, ll b, ll m = MOD) {
+    ll res = 1;
+    while (b > 0) {
+        if (b & 1) res = (res * a) % m;
+        a = (a * a) % m;
+        b >>= 1;
+    }
+    return res;
+}
+ 
+ll modinv(ll a, ll m = MOD) { 
+    return modpow(a, m - 2, m);
+}
+ 
+// ---------- Disjoint Set (Union-Find) Template ----------
+struct DSU {
+    vector<int> parent, size, rank;
+ 
+    DSU(int n) {
+        parent.resize(n );
+        size.assign(n , 1);
+        rank.assign(n , 0);
+        for (int i = 0; i < n; i++) parent[i] = i;
+    }
+ 
+    int find(int node) {
+        if (parent[node] == node) return node;
+        return parent[node] = find(parent[node]);
+    }
+ 
+    void unionBySize(int u, int v) {
+    int ulp_u = find(u);
+    int ulp_v = find(v);
+
+    if (ulp_u == ulp_v) return ;
+
+    if (size[ulp_u] < size[ulp_v]) {
+        parent[ulp_u] = ulp_v;
+        size[ulp_v] += size[ulp_u];
+    } else {
+        parent[ulp_v] = ulp_u;
+        size[ulp_u] += size[ulp_v];
+    }
+
+    
+}
+ 
+    void unionByRank(int u, int v) {
+        int pu = find(u), pv = find(v);
+        if (pu == pv) return;
+        if (rank[pu] < rank[pv]) parent[pu] = pv;
+        else if (rank[pu] > rank[pv]) parent[pv] = pu;
+        else parent[pv] = pu, rank[pu]++;
+    }
+};
+// --------------------------------------------------------
+
+ 
+
+// "all my victories belong to god and all my loses are mine alone"
+ 
+ 
+ 
+ 
+// ------------------------- SOLVE --------------------------
+void solve() {
+      string s;
+      cin>>s;
+      int n=s.size();
+      int up=0;
+      int down=0;
+      fr(i,n){
+        if(isupper(s[i])) up++;
+        else down++;
+      }
+      int mini=up;
+      if(up==n){
+        cout<<0<<"\n";
+      }
+      else if(up==0){
+        cout<<0<<"\n";
+      }
+      else{   
+        vi pref(n),suff(n);
+        pref[0]= 0;   // till idx i how many lower case letter
+        suff[n-1]=0;  //  idx i+1->n-1 how many upper case letter
+        for(int i=1;i<n;i++){
+            pref[i] = pref[i-1] + bool(islower(s[i-1]));
+        }
+
+        for(int i=n-2;i>=0;i--){
+            suff[i] = suff[i+1] + bool(isupper(s[i+1]));
+        }
+
+        
+        for(int i=0;i<s.size();i++){
+            int cnt=suff[i] + pref[i];
+            
+            mini=min(mini , cnt );
+        }
+        cout<<mini<<"\n";
+      }
+             
+}
+
+int main() {
+     //Fast I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    t=1;
+   // cin>>t;
+    while(t--){
+        solve();
+    }
+    
+    return 0;
+}
+
+
+
+
