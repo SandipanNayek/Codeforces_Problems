@@ -95,42 +95,9 @@ struct DSU {
  
  
 // ------------------------- SOLVE --------------------------
-//bool median()
-bool check(long long mid, vector<int>& v, long long k){
-    int n = v.size();
-    long long cost = 0;
 
-    for(int i = n/2; i < n; i++){
-        if(v[i] < mid){
-            cost += (mid - v[i]);
-        }
-        if(cost > k) return false;
-    }
-
-    return cost <= k;
-}
 void solve() {
-    ll n,k;
-    cin>>n>>k;
-    vi v(n);
-    fr(i,n){
-         cin>>v[i];
-     } 
-        sort(all(v));
-        ll lo=v[n/2];
-        ll hi=1e18;
-
-        ll ans=0;
-        while(lo <=hi){
-            ll mid=lo+(hi-lo) / 2;
-            if(check(mid,v,k)){
-                ans=mid;
-            lo=mid+1;
-            }
-            else
-            hi=mid-1;
-        }
-    cout<<ans<<"\n";
+    
 }
 
 int main() {
