@@ -97,7 +97,18 @@ struct DSU {
 // ------------------------- SOLVE --------------------------
 
 void solve() {
-    
+    ll n;
+    cin>>n;
+
+    fr(i,11){
+       if(n-111*i >=0 && ((n-111*i) % 11) ==0){
+        cout<<"YES"<<"\n";
+        return ;
+       }
+    }
+    cout<<"NO"<<"\n";
+
+
 }
 
 int main() {
@@ -107,7 +118,7 @@ int main() {
     
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }
