@@ -10,11 +10,13 @@ using pll = pair<ll,ll>;
  
 // --- Macros ---
 #define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
 #define pb push_back
 #define ff first
 #define ss second
 #define vi vector<int>
 #define vii vector<ll>
+#define i128 _int128
 
 #define fr(i,n) for(int i = 0; i < n; i++)
 #define fr1(i,n) for(int i = 1; i <= n; i++)
@@ -96,54 +98,55 @@ struct DSU {
  
 // ------------------------- SOLVE --------------------------
 
+
+bool dfs(int node, int p, vector<vector<int>>& g,
+         vector<int>& vis, vector<int>& parent,
+         vector<int>& depth, vector<int>& ans, int k){
+
+    vis[node] = 1;
+    parent[node] = p;
+
+    for(auto it : g[node]){
+        if(!vis[it]){
+            depth[it] = depth[node] + 1;
+            if(dfs(it, node, g, vis, parent, depth, ans, k)) return true;
+        }
+        else if(it != p){   // cycle detect
+            if(depth[node] - depth[it] >= k){
+                int cur = node;
+                ans.push_back(it);
+                while(cur != it){
+                    ans.push_back(cur);
+                    cur = parent[cur];
+                }
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void solve() {
-    ll n,W;
-    cin>>n>>W;
-    vii v(n);
-    fr(i,n){
-        cin>>v[i];
+    int n,m,k;
+    cin >> n >> m >> k; 
+ 
+    vector<vector<int>> g(n+1);
+    vector<int> parent(n+1), vis(n+1,0), depth(n+1), ans;
+ 
+    for(int i=0;i<m;i++){
+        int u,v;
+        cin >> u >> v;
+        g[u].push_back(v);
+        g[v].push_back(u);
     }
-
-    ll need = (W + 1) / 2;
-
-    int cnt=0;
-    vector<pair<ll,ll>>temp;
-    vector<ll>ans;
-
-    for(int i=0;i<n;i++){
-        
-        if(v[i] >= need && v[i] <= W){
-            cout<<1<<"\n";
-            cout<<i+1<<"\n";
-            return;
-        }
-        temp.pb({v[i],i});
+ 
+    dfs(1,-1,g,vis,parent,depth,ans,k);
+ 
+    cout << ans.size() << "\n";
+    if (ans.size() > 0) {
+        for(int x : ans) cout << x << " ";
+        cout << "\n";
     }
-
-    sort(all(temp));
-
-    ll C=0;
-    fr(i,n){
-        if(temp[i].first < need && C + temp[i].first <= W){
-            C+=temp[i].first ;
-            cnt++;
-            ans.pb(temp[i].second +1);
-        }
-        else{
-            break;
-        }
-    }
-
-    if(C >= need && C <= W){
-        cout<<cnt<<"\n";
-        for(int i=0;i<ans.size();i++){
-            cout<<ans[i]<<" ";
-        }
-    }
-    else{
-        cout<<-1;
-    }
-    cout<<"\n";
 }
 
 int main() {
@@ -153,7 +156,7 @@ int main() {
     
     int t;
     t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
         solve();
     }
@@ -162,11 +165,7 @@ int main() {
 }
 
 
-// 1
-// 1
-// -1
-// 6
-// 1 2 3 5 6 7
+
 
 
 
