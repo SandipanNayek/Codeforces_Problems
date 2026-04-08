@@ -81,29 +81,30 @@ public:
     
 
 void solve(){
-    int n;
+    ll n;
     cin>>n;
-    vector<int>arr(n);
-    int maxi=-1;
-    for(int i=0;i<n;i++){
-        cin>>arr[i];
-        maxi=max(maxi,arr[i]);
+    vector<ll>v(n);
+    fr(i,0,n){
+        cin>>v[i];
     }
-    maxi+=1;
-    vector<int>freq(maxi);
-    for(int i=0;i<n;i++){
-        freq[arr[i]]++;
+    if(n==1){
+        cout<<"NO"<<"\n";
+        return;
     }
-    SGTree st(maxi);
-    st.build(0,0,maxi-1,freq);
-    int cnt=0;
-    for(int i=0;i<n;i++){
-        freq[arr[i]]--;
-        st.update(0,0,maxi-1,arr[i],-1);
-
-       if(arr[i] >0) cnt+=st.query(0,0,maxi-1,1,arr[i]-1);
+   ll sum=0;
+   ll cnt=0;
+   for(auto it : v){
+    if(it ==1){
+        cnt++;
     }
-    cout<<cnt<<"\n";
+    sum+=it;
+   }
+   if(sum >= cnt + n){
+    cout<<"YES"<<"\n";
+   }
+   else{
+    cout<<"NO"<<"\n";
+   }
 }
 int main() {
      //Fast I/O
@@ -112,7 +113,7 @@ int main() {
     
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

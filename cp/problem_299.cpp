@@ -81,29 +81,24 @@ public:
     
 
 void solve(){
-    int n;
-    cin>>n;
-    vector<int>arr(n);
-    int maxi=-1;
-    for(int i=0;i<n;i++){
-        cin>>arr[i];
-        maxi=max(maxi,arr[i]);
+    ll n,x,y;
+    cin>>n>>x>>y;
+    vii v(n),a(n,0);
+    fr(i,0,n){
+        cin>>v[i];
     }
-    maxi+=1;
-    vector<int>freq(maxi);
-    for(int i=0;i<n;i++){
-        freq[arr[i]]++;
+    ll cnt=0;
+    fr(i,0,n){
+        a[i] =v[i] / x;
+        cnt +=v[i]/x;
     }
-    SGTree st(maxi);
-    st.build(0,0,maxi-1,freq);
-    int cnt=0;
+    ll maxi=-1e9;
     for(int i=0;i<n;i++){
-        freq[arr[i]]--;
-        st.update(0,0,maxi-1,arr[i],-1);
+        ll tmaxi=v[i] + (cnt - a[i])*y;
+        maxi=max(tmaxi,maxi);
+    }
+    cout<<maxi<<"\n";
 
-       if(arr[i] >0) cnt+=st.query(0,0,maxi-1,1,arr[i]-1);
-    }
-    cout<<cnt<<"\n";
 }
 int main() {
      //Fast I/O
@@ -112,7 +107,7 @@ int main() {
     
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

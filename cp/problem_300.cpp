@@ -79,31 +79,19 @@ public:
  
 // ------------------------- SOLVE -------------------------- 
     
+int count(int a, int b){
+    if(a <= 0 || b <= 0) return 0;
+    return (a * b + 1) / 2;
+}
 
 void solve(){
-    int n;
-    cin>>n;
-    vector<int>arr(n);
-    int maxi=-1;
-    for(int i=0;i<n;i++){
-        cin>>arr[i];
-        maxi=max(maxi,arr[i]);
-    }
-    maxi+=1;
-    vector<int>freq(maxi);
-    for(int i=0;i<n;i++){
-        freq[arr[i]]++;
-    }
-    SGTree st(maxi);
-    st.build(0,0,maxi-1,freq);
-    int cnt=0;
-    for(int i=0;i<n;i++){
-        freq[arr[i]]--;
-        st.update(0,0,maxi-1,arr[i],-1);
+    int n,m,x;
+    cin>>n>>m>>x;
 
-       if(arr[i] >0) cnt+=st.query(0,0,maxi-1,1,arr[i]-1);
-    }
-    cout<<cnt<<"\n";
+    int prev = count(n - 2*(x-1), m - 2*(x-1));
+    int next = count(n - 2*x, m - 2*x);
+
+    cout << prev - next << "\n";
 }
 int main() {
      //Fast I/O
