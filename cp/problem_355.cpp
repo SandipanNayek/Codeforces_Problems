@@ -1,15 +1,11 @@
-
 #include <bits/stdc++.h>
 using namespace std;
- 
-// --- Type shortcuts ---
 using ll = long long;
 using ull = unsigned long long; 
 using ld = long double;
 using pii = pair<int,int>;
 using pll = pair<ll,ll>;
  
-// --- Macros ---
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define pb push_back
@@ -29,29 +25,48 @@ using pll = pair<ll,ll>;
 #define fr1(i,a,n) for(int i = 1; i <= n; i++)
 #define rev(i,a,n) for(int i = n-1; i >= a; i--)
 
-// "all my victories belong to god and all my loses are mine alone" 
-// ------------------------- SOLVE -------------------------- 
-
-
-
 void solve() {
-    int a =5;
-    int b =6;
-
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
-}
-int main() {
-    // Optimize standard I/O operations for competitive programming
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    int t=1;
-    //cin >> t;
-    while (t--) {
-        solve();
+    int n ;
+    cin>>n;
+    vi a(n);
+    vi b(n);
+    fr(i,0,n){
+        get(a[i]);
     }
+    fr(i,0,n){
+        get(b[i]);
+    }
+    if(is_sorted(all(a))){
+        cout<<"YES"<<"\n";
+        return;
+    }
+    bool allsame=true;
+    for(int i=1;i<n;i++){
+        if(b[i-1] != b[i]){
+            allsame=false;
+            break;
+        }
+    }
+    if(allsame){
+        for(int i=1;i<n;i++){
+            if(a[i-1] > a[i]){
+                no;
+                return;
+            }
+        }
+    }
+    yes;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    t=1;
+    cin >> t;
     
+    while (t--) solve();
+
     return 0;
 }

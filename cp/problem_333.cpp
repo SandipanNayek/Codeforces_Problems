@@ -33,7 +33,7 @@ using pll = pair<ll,ll>;
 // ------------------------- SOLVE -------------------------- 
 
 void solve(){
-    int n,k,x;
+    ll n,k,x;
     get(n);
     get(k);
     get(x);

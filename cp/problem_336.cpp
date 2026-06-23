@@ -32,23 +32,41 @@ using pll = pair<ll,ll>;
 // "all my victories belong to god and all my loses are mine alone" 
 // ------------------------- SOLVE -------------------------- 
 
-
-
 void solve() {
-    int a =5;
-    int b =6;
-
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
+    ll n ,s,m;
+    cin>>n>>s>>m;
+    vii interval;
+    fr(i,0,n){
+      ll l ,r;
+      get(l);
+      get(r);
+     interval.pb(l);
+     interval.pb(r);
+    }
+    
+    ll ct=0;
+    bool flag=false;
+    for(int i=0;i<interval.size();i=i+2){
+         ll time=interval[i]-ct;
+          ct=interval[i+1];
+          if(time >= s) {
+            flag=true;
+            break;
+          }
+    }
+    if(m - ct >= s){
+        flag=true;
+    }
+    cout << (flag ? "YES" : "NO") << '\n';
+    
 }
 int main() {
     // Optimize standard I/O operations for competitive programming
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t=1;
-    //cin >> t;
+    int t;
+    cin >> t;
     while (t--) {
         solve();
     }

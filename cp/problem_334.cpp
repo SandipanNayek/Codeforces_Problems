@@ -33,22 +33,38 @@ using pll = pair<ll,ll>;
 // ------------------------- SOLVE -------------------------- 
 
 
-
 void solve() {
-    int a =5;
-    int b =6;
-
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
+    string s;
+    get(s);
+    stack<char>st;
+    int cnt =0;
+    for(auto it : s){
+        if(it == '4'){
+            cnt++;
+        }
+        else{
+            if(st.empty()){
+                st.push(it);
+            }
+            else{
+                if(((st.top() - '0') * 10 + (it - '0')) % 4 ==0){
+                    cnt++;
+                }
+                else{
+                    st.push(it);
+                }
+            }
+        }
+    }
+    cout<<cnt<<"\n";
 }
 int main() {
     // Optimize standard I/O operations for competitive programming
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t=1;
-    //cin >> t;
+    int t;
+    cin >> t;
     while (t--) {
         solve();
     }

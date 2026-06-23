@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
  
@@ -18,12 +17,6 @@ using pll = pair<ll,ll>;
 #define vi vector<int>
 #define vii vector<ll>
 #define i128 _int128
-#define get(x) cin>>x
-#define print(x) cout<<x<<"\n";
-
-#define yes cout<<"YES"<<'\n';
-#define no cout<<"NO"<<'\n';
-#define __ return;
 
 #define fr(i,a,n) for(int i = a; i < n; i++)
 #define fr1(i,a,n) for(int i = 1; i <= n; i++)
@@ -31,27 +24,53 @@ using pll = pair<ll,ll>;
 
 // "all my victories belong to god and all my loses are mine alone" 
 // ------------------------- SOLVE -------------------------- 
-
-
-
 void solve() {
-    int a =5;
-    int b =6;
+    int n;
+    cin >> n;
+    string r1, r2;
+    cin >> r1 >> r2;
 
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
+    int m = 0;
+    
+    
+    for (int i = 0; i < n; i++) {
+        if (r1[i] != r2[i]) {
+            m++;
+        }
+    }
+    
+    int ans = m;
+    
+   
+    for (int i = 0; i < n - 1; i++) {
+        if (r1[i] != r2[i]) { 
+            pro
+            if (r1[i] == r1[i+1] && r2[i] == r2[i+1]) { 
+                ans -= 2; 
+                i++;      
+            }
+        }
+    }
+    
+    cout << ans << "\n";
 }
 int main() {
-    // Optimize standard I/O operations for competitive programming
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    int t=1;
-    //cin >> t;
-    while (t--) {
+   
+    int t;
+    t=1;
+    cin>>t;
+    while(t--){
         solve();
     }
     
     return 0;
 }
+
+
+
+
+
+
+ 

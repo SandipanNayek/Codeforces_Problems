@@ -18,12 +18,6 @@ using pll = pair<ll,ll>;
 #define vi vector<int>
 #define vii vector<ll>
 #define i128 _int128
-#define get(x) cin>>x
-#define print(x) cout<<x<<"\n";
-
-#define yes cout<<"YES"<<'\n';
-#define no cout<<"NO"<<'\n';
-#define __ return;
 
 #define fr(i,a,n) for(int i = a; i < n; i++)
 #define fr1(i,a,n) for(int i = 1; i <= n; i++)
@@ -31,27 +25,48 @@ using pll = pair<ll,ll>;
 
 // "all my victories belong to god and all my loses are mine alone" 
 // ------------------------- SOLVE -------------------------- 
-
-
-
 void solve() {
-    int a =5;
-    int b =6;
-
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
-}
+    int n;
+    cin>>n;
+    vi v(n);
+    fr(i,0,n){
+        cin>>v[i];
+    }
+    sort(rall(v));
+    int cnt=0;
+    fr(i,0,n){
+        if(v[i]!=1){
+            cnt++;
+        }
+        else{
+            if((n-i) % 2==0){
+                cnt+=(n-i)/2;
+            }
+            else{
+                cnt+=(n-i)/2 +1;
+            }
+            break;
+        }
+    }
+    cout<<cnt<<"\n";
+   }
 int main() {
-    // Optimize standard I/O operations for competitive programming
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    int t=1;
-    //cin >> t;
-    while (t--) {
+   
+    int t;
+    t=1;
+    cin>>t;
+    while(t--){
         solve();
     }
     
     return 0;
 }
+
+
+
+
+
+
+ 

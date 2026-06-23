@@ -19,6 +19,9 @@ using pll = pair<ll,ll>;
 #define vii vector<ll>
 #define i128 _int128
 #define get(x) cin>>x
+#define yes cout<<"YES"<<'\n';
+#define no cout<<"NO"<<'\n';
+#define __ return;
 
 #define fr(i,a,n) for(int i = a; i < n; i++)
 #define fr1(i,a,n) for(int i = 1; i <= n; i++)
@@ -28,21 +31,27 @@ using pll = pair<ll,ll>;
 // ------------------------- SOLVE -------------------------- 
 
 void solve(){
-    int n ;
+    int n;
     cin>>n;
     vi v(n);
-    fr (i , 0 ,n){
+    fr(i,0,n){
         get(v[i]);
     }
-    fr(i,1,n){
-        if(!(abs(v[i] - v[i-1]) == 7 || abs(v[i] - v[i-1]) == 5)){
-            cout<<"NO"<<"\n";
-            return;
+    unordered_map<int,int>mp;
+    int ans = 0;;
+    int len =0;probl
+    
+    for(int i=0;i<n;i++){
+
+        mp[v[i]]++;
+        if(v[i] == mp[v[i]]){
+            len+=v[i];
+            mp[v[i]] = 0;
         }
+
         
     }
-    cout<<"YES"<<'\n';
-
+    cout<<ans<<"\n";
 }
 
 int main(){

@@ -1,15 +1,11 @@
-
 #include <bits/stdc++.h>
 using namespace std;
- 
-// --- Type shortcuts ---
 using ll = long long;
 using ull = unsigned long long; 
 using ld = long double;
 using pii = pair<int,int>;
 using pll = pair<ll,ll>;
  
-// --- Macros ---
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define pb push_back
@@ -29,29 +25,45 @@ using pll = pair<ll,ll>;
 #define fr1(i,a,n) for(int i = 1; i <= n; i++)
 #define rev(i,a,n) for(int i = n-1; i >= a; i--)
 
-// "all my victories belong to god and all my loses are mine alone" 
-// ------------------------- SOLVE -------------------------- 
-
-
-
 void solve() {
-    int a =5;
-    int b =6;
-
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
-}
-int main() {
-    // Optimize standard I/O operations for competitive programming
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    int t=1;
-    //cin >> t;
-    while (t--) {
-        solve();
+    int n;
+    cin>>n;
+    vi v(n);
+    fr(i,0,n){
+        get(v[i]);
     }
+    unordered_map<int,int>mp;
+    for(auto it : v){
+        mp[it]++;
+    }
+    bool bob = false;
+    for(int mex=0; ; mex++){
+       if(mp[mex] ==0){
+        cout<<mex<<"\n";
+        return;
+       }
+       if(mp[mex] == 1){
+        if(bob){
+            cout<<mex<<"\n";
+            return;
+        }
+        bob = true;
+       }
+
+    }
+
+
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    t=1;
+    cin >> t;
     
+    while (t--) solve();
+
     return 0;
 }

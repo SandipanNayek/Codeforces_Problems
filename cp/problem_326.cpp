@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
  
@@ -18,12 +17,6 @@ using pll = pair<ll,ll>;
 #define vi vector<int>
 #define vii vector<ll>
 #define i128 _int128
-#define get(x) cin>>x
-#define print(x) cout<<x<<"\n";
-
-#define yes cout<<"YES"<<'\n';
-#define no cout<<"NO"<<'\n';
-#define __ return;
 
 #define fr(i,a,n) for(int i = a; i < n; i++)
 #define fr1(i,a,n) for(int i = 1; i <= n; i++)
@@ -31,27 +24,60 @@ using pll = pair<ll,ll>;
 
 // "all my victories belong to god and all my loses are mine alone" 
 // ------------------------- SOLVE -------------------------- 
-
-
-
 void solve() {
-    int a =5;
-    int b =6;
-
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
+    int n;
+    cin >> n;
+    
+    vi a(n);
+    vi s(n);
+    
+    fr(i,0,n) {
+        cin >> a[i];
+        s[i] = a[i];
+    } 
+    sort(all(s));
+    int gm = s[n / 2];
+    vector<int> dp(n + 1, -1);
+    dp[0] = 0;
+    
+    fr1(i,1,n) {
+        int cg = 0;
+        int cl = 0;   
+        for (int j = i - 1; j >= 0; j--) {
+            if (a[j] > gm) {
+                cg++;
+            } else if (a[j] < gm) {
+                cl++;
+            }
+            
+            int l = i-j;
+            if (l % 2 != 0) {
+                if (cg <= l/2 && cl <= l / 2 && dp[j] != -1) {
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+    }
+    
+    cout << dp[n] << "\n";
 }
 int main() {
-    // Optimize standard I/O operations for competitive programming
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    int t=1;
-    //cin >> t;
-    while (t--) {
+   
+    int t;
+    t=1;
+    cin>>t;
+    while(t--){
         solve();
     }
     
     return 0;
 }
+
+
+
+
+
+
+ 

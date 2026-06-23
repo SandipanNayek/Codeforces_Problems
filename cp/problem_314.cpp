@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
  
@@ -18,12 +17,6 @@ using pll = pair<ll,ll>;
 #define vi vector<int>
 #define vii vector<ll>
 #define i128 _int128
-#define get(x) cin>>x
-#define print(x) cout<<x<<"\n";
-
-#define yes cout<<"YES"<<'\n';
-#define no cout<<"NO"<<'\n';
-#define __ return;
 
 #define fr(i,a,n) for(int i = a; i < n; i++)
 #define fr1(i,a,n) for(int i = 1; i <= n; i++)
@@ -32,26 +25,40 @@ using pll = pair<ll,ll>;
 // "all my victories belong to god and all my loses are mine alone" 
 // ------------------------- SOLVE -------------------------- 
 
-
+bool isPerfectSquare(ll x){
+    ll sq=sqrt(x);
+    return x==sq*sq;
+}
 
 void solve() {
-    int a =5;
-    int b =6;
+    ll n;
+    cin>>n;
 
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
+    if(n % 2==0 && isPerfectSquare(n/2) ||n % 4==0 && isPerfectSquare(n/4)){
+        cout<<"YES"<<"\n";
+    }
+    else{
+        cout<<"NO"<<"\n";
+    }
 }
 int main() {
-    // Optimize standard I/O operations for competitive programming
+     //Fast I/O
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    int t=1;
-    //cin >> t;
-    while (t--) {
+   
+    int t;
+    t=1;
+    cin>>t;
+    while(t--){
         solve();
     }
     
     return 0;
 }
+
+
+
+
+
+
+ 

@@ -19,8 +19,6 @@ using pll = pair<ll,ll>;
 #define vii vector<ll>
 #define i128 _int128
 #define get(x) cin>>x
-#define print(x) cout<<x<<"\n";
-
 #define yes cout<<"YES"<<'\n';
 #define no cout<<"NO"<<'\n';
 #define __ return;
@@ -32,26 +30,30 @@ using pll = pair<ll,ll>;
 // "all my victories belong to god and all my loses are mine alone" 
 // ------------------------- SOLVE -------------------------- 
 
+void solve(){
+    string s;
+   get(s);
+   if(s == "YES" || s=="Yes" || s=="yes" || s=="yES" || s=="yeS" || s=="YEs" ||s== "YeS" || s=="yEs" ){
+    yes;
+   }
+   else{
+    no;
+   }
 
-
-void solve() {
-    int a =5;
-    int b =6;
-
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
-}
-int main() {
-    // Optimize standard I/O operations for competitive programming
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     
-    int t=1;
-    //cin >> t;
-    while (t--) {
-        solve();
-    }
-    
-    return 0;
+
 }
+
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int t; cin>>t;
+    while(t--) solve();
+}
+
+
+
+
+
+
+ 

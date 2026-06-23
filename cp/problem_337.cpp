@@ -26,29 +26,29 @@ using pll = pair<ll,ll>;
 #define __ return;
 
 #define fr(i,a,n) for(int i = a; i < n; i++)
-#define fr1(i,a,n) for(int i = 1; i <= n; i++)
+#define fr1(i,a,n) for(int i = a; i <= n; i++)
 #define rev(i,a,n) for(int i = n-1; i >= a; i--)
 
 // "all my victories belong to god and all my loses are mine alone" 
 // ------------------------- SOLVE -------------------------- 
 
-
-
 void solve() {
-    int a =5;
-    int b =6;
+    int n ;
+    cin>>n;
+    
+    fr(i,0,n){
+        cout << 2 * i + 1 << (i == n - 1 ? "" : " ");
+    }
+    cout<<"\n";
 
-    cout<<a<<" "<<b<<"\n";
-
-    //change(a,b);
 }
 int main() {
     // Optimize standard I/O operations for competitive programming
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t=1;
-    //cin >> t;
+    int t;
+    cin >> t;
     while (t--) {
         solve();
     }
